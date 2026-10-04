@@ -71,7 +71,7 @@ function ClarifySign() {
   const [speed, setSpeed] = useState("1×");
   const [notice, setNotice] = useState("");
 
-  const activeLanguage = languages.find((item) => item.code === language) ?? languages[0];
+  const activeLanguage = languages.find((item) => item.code === language)?.label ?? "English";
 
   function showNotice(message: string) {
     setNotice(message);
@@ -204,7 +204,7 @@ function ClarifySign() {
             setChosenOption={setChosenOption}
             researchMode={researchMode}
             speakAloud={speakAloud}
-            language={activeLanguage.label}
+            language={activeLanguage}
             transcript={transcript}
             replyDraft={replyDraft}
             setReplyDraft={setReplyDraft}
