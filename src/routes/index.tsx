@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowDownToLine,
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ClarifySign — Communication at the counter" },
       {
         property: "og:description",
-        content: "A thoughtful two-way sign and speech communication demo for retail." ,
+        content: "A thoughtful two-way sign and speech communication demo for retail.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -436,7 +436,7 @@ function SignToVoice({
   );
 }
 
-function StatusBadge({ icon, label }: { icon?: React.ReactNode; label: string }) {
+function StatusBadge({ icon, label }: { icon?: ReactNode; label: string }) {
   return (
     <span className="status-badge">{icon && <span className="text-primary">{icon}</span>}{label}</span>
   );
