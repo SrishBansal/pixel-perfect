@@ -12,7 +12,6 @@ import {
   Languages,
   Mic,
   MoreHorizontal,
-  Pause,
   Play,
   RotateCcw,
   Share2,
@@ -31,6 +30,7 @@ import {
   demoClarification,
   demoConversation,
   languages,
+  type ConversationTurn,
   type DemoState,
 } from "@/components/clarifysign/demo-data";
 
@@ -63,7 +63,7 @@ function ClarifySign() {
   const [speakAloud, setSpeakAloud] = useState(true);
   const [researchMode, setResearchMode] = useState(false);
   const [demoState, setDemoState] = useState<DemoState>("conversation");
-  const [transcript, setTranscript] = useState(demoConversation);
+  const [transcript, setTranscript] = useState<ConversationTurn[]>(demoConversation);
   const [chosenOption, setChosenOption] = useState<string | null>(null);
   const [replyDraft, setReplyDraft] = useState("");
   const [draft, setDraft] = useState("");
@@ -277,7 +277,7 @@ function SignToVoice({
   researchMode: boolean;
   speakAloud: boolean;
   language: string;
-  transcript: typeof demoConversation;
+  transcript: ConversationTurn[];
   replyDraft: string;
   setReplyDraft: (value: string) => void;
   onSendReply: () => void;

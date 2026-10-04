@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## UI architecture
+- Keep demo conversation content and domain-shaped types separate from route presentation so sample data can be replaced by real integrations without rewriting the interface.
