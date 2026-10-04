@@ -63,10 +63,11 @@ function ClarifySign() {
   const [speakAloud, setSpeakAloud] = useState(true);
   const [researchMode, setResearchMode] = useState(false);
   const [demoState, setDemoState] = useState<DemoState>("conversation");
+  const [transcript, setTranscript] = useState(demoConversation);
   const [chosenOption, setChosenOption] = useState<string | null>(null);
+  const [replyDraft, setReplyDraft] = useState("");
   const [draft, setDraft] = useState("");
   const [shownText, setShownText] = useState("");
-  const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState("1×");
   const [notice, setNotice] = useState("");
 
@@ -88,7 +89,6 @@ function ClarifySign() {
       return;
     }
     setShownText(draft.trim());
-    setPlaying(false);
   }
 
   async function copyText() {
@@ -205,6 +205,24 @@ function ClarifySign() {
             researchMode={researchMode}
             speakAloud={speakAloud}
             language={activeLanguage.label}
+            transcript={transcript}
+            replyDraft={replyDraft}
+            setReplyDraft={setReplyDraft}
+            onSendReply={() => {
+              const text = replyDraft.trim();
+              if (!text) return;
+              setTranscript((current) => [
+                ...current,
+                {
+                  id: `shopkeeper-${Date.now()}`,
+                  speaker: "shopkeeper",
+                  label: "Shopkeeper · typed",
+                  text,
+                  time: new Intl.DateTimeFormat("en", { hour: "2-digit", minute: "2-digit" }).format(new Date()),
+                },
+              ]);
+              setReplyDraft("");
+            }}
           />
         ) : (
           <VoiceToSign
@@ -213,8 +231,6 @@ function ClarifySign() {
             draft={draft}
             setDraft={setDraft}
             shownText={shownText}
-            playing={playing}
-            setPlaying={setPlaying}
             speed={speed}
             setSpeed={setSpeed}
             onShowSign={handleShowSign}
@@ -249,6 +265,10 @@ function SignToVoice({
   researchMode,
   speakAloud,
   language,
+  transcript,
+  replyDraft,
+  setReplyDraft,
+  onSendReply,
 }: {
   demoState: DemoState;
   setDemoState: (state: DemoState) => void;
@@ -257,6 +277,10 @@ function SignToVoice({
   researchMode: boolean;
   speakAloud: boolean;
   language: string;
+  transcript: typeof demoConversation;
+  replyDraft: string;
+  setReplyDraft: (value: string) => void;
+  onSendReply: () => void;
 }) {
   return (
     <div className="mt-6 grid gap-5 xl:grid-cols-[1.02fr_0.98fr]">
@@ -364,7 +388,7 @@ function SignToVoice({
           ) : (
             <>
               <div className="conversation-date"><span>Today · sample conversation</span></div>
-              {demoConversation.map((turn) => (
+              {transcript.map((turn) => (
                 <div key={turn.id} className={`chat-turn ${turn.speaker === "shopkeeper" ? "chat-turn-right" : ""}`}>
                   <div className={`speaker-avatar ${turn.speaker === "shopkeeper" ? "speaker-avatar-shop" : ""}`} aria-hidden="true">
                     {turn.speaker === "customer" ? <Hand size={16} /> : "S"}
@@ -419,10 +443,15 @@ function SignToVoice({
             <span className="text-[11px] text-muted-foreground">Text reply · demo only</span>
           </div>
           <div className="mt-2 flex items-center gap-2">
-            <div className="min-w-0 flex-1 rounded-md border border-input bg-background px-3 py-2.5 text-sm text-muted-foreground">
-              Type a reply…
-            </div>
-            <Button type="button" className="h-10 px-4" onClick={() => {}} aria-label="Send reply">
+            <input
+              value={replyDraft}
+              onChange={(event) => setReplyDraft(event.target.value)}
+              onKeyDown={(event) => { if (event.key === "Enter") onSendReply(); }}
+              className="h-10 min-w-0 flex-1 rounded-md border border-input bg-background px-3 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              placeholder="Type a reply…"
+              aria-label="Type a reply"
+            />
+            <Button type="button" className="h-10 px-4" onClick={onSendReply} aria-label="Add reply to demo transcript">
               Reply <ArrowRight size={15} />
             </Button>
           </div>
@@ -448,8 +477,6 @@ function VoiceToSign({
   draft,
   setDraft,
   shownText,
-  playing,
-  setPlaying,
   speed,
   setSpeed,
   onShowSign,
@@ -461,8 +488,6 @@ function VoiceToSign({
   draft: string;
   setDraft: (value: string) => void;
   shownText: string;
-  playing: boolean;
-  setPlaying: (playing: boolean) => void;
   speed: string;
   setSpeed: (speed: string) => void;
   onShowSign: () => void;
@@ -591,7 +616,7 @@ function VoiceToSign({
 
         <div className="playback-area px-5 py-4">
           <div className="playback-cluster" role="group" aria-label="Preview controls">
-            <Button type="button" variant="ghost" size="icon" className="playback-icon" aria-label="Replay placeholder" title="Replay placeholder" onClick={() => { setPlaying(false); }}>
+          <Button type="button" variant="ghost" size="icon" className="playback-icon" aria-label="Replay signing animation unavailable" title="Signing animation unavailable" disabled>
               <RotateCcw />
             </Button>
             <Button
@@ -599,13 +624,13 @@ function VoiceToSign({
               variant="default"
               size="icon"
               className="playback-play"
-              aria-label={playing ? "Pause placeholder" : "Play placeholder"}
-              title={playing ? "Pause placeholder" : "Play placeholder"}
-              onClick={() => { if (!shownText) { onNotice("Prepare a text preview first."); return; } setPlaying(!playing); }}
+              aria-label="Signing animation unavailable"
+              title="Signing animation unavailable"
+              disabled
             >
-              {playing ? <Pause /> : <Play />}
+              <Play />
             </Button>
-            <span className="playback-status">{playing ? "Preview controls · paused demo" : "Static preview · no motion"}</span>
+            <span className="playback-status">{shownText ? "Text prepared · no animation" : "Static preview · no motion"}</span>
             <span className="playback-divider" />
             <div className="relative">
               <Button type="button" variant="ghost" className="playback-speed" aria-expanded={showSpeedOptions} onClick={() => setShowSpeedOptions((current) => !current)}>
