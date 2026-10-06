@@ -62,26 +62,26 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.963 0.008 232);
-  --foreground: oklch(0.25 0.035 225);
-  --card: oklch(0.994 0.003 230);
-  --card-foreground: oklch(0.25 0.035 225);
-  --popover: oklch(0.994 0.003 230);
-  --popover-foreground: oklch(0.25 0.035 225);
-  --primary: oklch(0.43 0.075 205);
-  --primary-foreground: oklch(0.99 0.003 225);
-  --secondary: oklch(0.92 0.025 198);
-  --secondary-foreground: oklch(0.34 0.055 205);
-  --muted: oklch(0.94 0.012 225);
-  --muted-foreground: oklch(0.49 0.025 225);
-  --accent: oklch(0.82 0.105 66);
-  --accent-foreground: oklch(0.34 0.065 48);
+  --radius: 0.75rem;
+  --background: oklch(0.129 0.025 264);
+  --foreground: oklch(0.96 0.008 264);
+  --card: oklch(0.183 0.025 264);
+  --card-foreground: oklch(0.96 0.008 264);
+  --popover: oklch(0.19 0.027 264);
+  --popover-foreground: oklch(0.96 0.008 264);
+  --primary: oklch(0.66 0.13 278);
+  --primary-foreground: oklch(0.985 0.004 264);
+  --secondary: oklch(0.25 0.035 267);
+  --secondary-foreground: oklch(0.92 0.012 264);
+  --muted: oklch(0.225 0.024 264);
+  --muted-foreground: oklch(0.69 0.025 264);
+  --accent: oklch(0.75 0.12 174);
+  --accent-foreground: oklch(0.94 0.03 174);
   --destructive: oklch(0.56 0.19 28);
   --destructive-foreground: oklch(0.99 0.003 225);
-  --border: oklch(0.88 0.016 220);
-  --input: oklch(0.85 0.018 218);
-  --ring: oklch(0.59 0.07 205);
+  --border: oklch(0.3 0.025 264 / 72%);
+  --input: oklch(0.34 0.03 264);
+  --ring: oklch(0.66 0.13 278);
   --chart-1: oklch(0.43 0.075 205);
   --chart-2: oklch(0.66 0.115 69);
   --chart-3: oklch(0.62 0.085 154);
@@ -95,9 +95,9 @@
   --sidebar-accent-foreground: oklch(0.34 0.055 205);
   --sidebar-border: oklch(0.88 0.016 220);
   --sidebar-ring: oklch(0.59 0.07 205);
-  --surface: oklch(0.985 0.005 230);
-  --camera: oklch(0.925 0.018 211);
-  --camera-accent: oklch(0.94 0.03 77);
+  --surface: oklch(0.17 0.024 264);
+  --camera: oklch(0.145 0.022 264);
+  --camera-accent: oklch(0.23 0.042 278);
 }
 
 .dark {
@@ -139,7 +139,7 @@
 }
 
 @theme inline {
-  --font-display: "Newsreader", "Noto Sans Devanagari", serif;
+  --font-display: "Inter", "Noto Sans Devanagari", sans-serif;
   --font-sans: "Inter", "Noto Sans Devanagari", sans-serif;
   --color-surface: var(--surface);
   --color-camera: var(--camera);
@@ -159,17 +159,21 @@
   }
 }
 
-.font-display { font-family: "Newsreader", "Noto Sans Devanagari", serif; }
+.font-display { font-family: "Inter", "Noto Sans Devanagari", sans-serif; letter-spacing: 0; }
 .font-indic { font-family: "Noto Sans Devanagari", "Inter", sans-serif; }
-.brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 8px; background: var(--color-primary); color: var(--color-primary-foreground); }
+.app-window { min-height: calc(100vh - 3rem); border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); box-shadow: 0 32px 90px oklch(0.04 0.02 264 / 62%); }
+.app-titlebar { display: flex; min-height: 68px; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--color-border); background: color-mix(in oklab, var(--color-surface) 84%, transparent); padding: 12px 22px; backdrop-filter: blur(16px); }
+.traffic-lights { display: flex; gap: 8px; }.traffic-lights i { width: 12px; height: 12px; border-radius: 50%; background: oklch(0.68 0.2 25); }.traffic-lights i:nth-child(2) { background: oklch(0.79 0.16 82); }.traffic-lights i:nth-child(3) { background: oklch(0.72 0.17 147); }
+.titlebar-settings { display: flex; align-items: center; gap: 16px; }
+.brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 9px; background: var(--color-primary); color: var(--color-primary-foreground); box-shadow: inset 0 1px 0 oklch(1 0 0 / 18%); }
 .workspace-intro { min-height: 174px; }
-.mode-switch { display: inline-flex; gap: 3px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); padding: 4px; }
+.mode-switch { display: inline-flex; gap: 3px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-muted); padding: 4px; box-shadow: inset 0 1px 0 oklch(1 0 0 / 4%); }
 .demo-badge,.experimental-badge { display: inline-flex; min-height: 28px; align-items: center; gap: 7px; border-radius: 999px; border: 1px solid var(--color-border); padding: 0 10px; color: var(--color-muted-foreground); font-size: 10px; font-weight: 700; }
 .experimental-badge { border-color: color-mix(in oklab, var(--color-accent) 48%, var(--color-border)); background: color-mix(in oklab, var(--color-camera-accent) 58%, var(--color-surface)); color: var(--color-accent-foreground); }
-.workspace-panel { border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); box-shadow: 0 2px 9px oklch(0.2 0.03 220 / 4%); }
+.workspace-panel { border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-card); box-shadow: 0 18px 46px oklch(0.06 0.025 264 / 28%), inset 0 1px 0 oklch(1 0 0 / 4%); }
 .section-icon { display: grid; width: 38px; height: 38px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in oklab, var(--color-primary) 18%, var(--color-border)); border-radius: 8px; background: color-mix(in oklab, var(--color-primary) 8%, var(--color-surface)); color: var(--color-primary); }
 .section-icon-saffron { border-color: color-mix(in oklab, var(--color-accent) 28%, var(--color-border)); background: color-mix(in oklab, var(--color-accent) 14%, var(--color-surface)); color: var(--color-accent-foreground); }
-.camera-stage { position: relative; display: grid; min-height: 330px; overflow: hidden; place-items: center; border: 1px solid var(--color-border); border-radius: 6px; background-color: var(--color-camera); background-image: linear-gradient(color-mix(in oklab, var(--color-primary) 5%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 5%, transparent) 1px, transparent 1px); background-size: 34px 34px; }
+.camera-stage { position: relative; display: grid; min-height: 410px; overflow: hidden; place-items: center; border-radius: 16px; background-color: var(--color-camera); background-image: linear-gradient(color-mix(in oklab, var(--color-primary) 5%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--color-primary) 5%, transparent) 1px, transparent 1px); background-size: 34px 34px; box-shadow: inset 0 0 0 1px oklch(1 0 0 / 10%); }
 .camera-stage-content { display: flex; max-width: 90%; flex-direction: column; align-items: center; text-align: center; }
 .camera-icon-ring { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid color-mix(in oklab, var(--color-primary) 23%, var(--color-border)); border-radius: 50%; background: var(--color-surface); color: var(--color-primary); }
 .camera-corner { position: absolute; width: 20px; height: 20px; border-color: color-mix(in oklab, var(--color-primary) 38%, transparent); }
@@ -178,13 +182,17 @@
 .camera-corner-bl { bottom: 16px; left: 16px; border-bottom: 1px solid; border-left: 1px solid; }
 .camera-corner-br { right: 16px; bottom: 16px; border-right: 1px solid; border-bottom: 1px solid; }
 .camera-watermark { position: absolute; right: 18px; bottom: 16px; color: var(--color-muted-foreground); font-size: 9px; font-weight: 600; }
-.status-badge { display: inline-flex; height: 29px; align-items: center; gap: 6px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-background); padding: 0 8px; color: var(--color-muted-foreground); font-size: 11px; }
+.status-badge { display: inline-flex; height: 29px; align-items: center; gap: 6px; border-radius: 7px; background: color-mix(in oklab, var(--color-muted) 72%, transparent); padding: 0 8px; color: var(--color-muted-foreground); font-size: 11px; }
+.floating-control-bar { z-index: 8; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid oklch(1 0 0 / 10%); border-radius: 14px; background: oklch(0.18 0.025 264 / 50%); padding: 7px; box-shadow: 0 14px 32px oklch(0.05 0.02 264 / 45%), inset 0 1px 0 oklch(1 0 0 / 7%); backdrop-filter: blur(12px); }
+.camera-control-bar { position: absolute; right: 18px; bottom: 18px; left: 18px; }
+.translation-control-bar { position: absolute; right: 20px; bottom: 20px; left: 20px; flex-wrap: wrap; }
+.control-divider { width: 1px; height: 26px; background: var(--color-border); }
 .camera-disclaimer { border-top: 1px solid var(--color-border); background: color-mix(in oklab, var(--color-primary) 3%, var(--color-surface)); }
 .conversation-date { display: flex; align-items: center; gap: 10px; color: var(--color-muted-foreground); font-size: 11px; }
 .conversation-date::before,.conversation-date::after { height: 1px; flex: 1; background: var(--color-border); content: ""; }
 .chat-turn { display: flex; align-items: flex-end; gap: 9px; }
 .chat-turn-right { flex-direction: row-reverse; }
-.speaker-avatar { display: grid; width: 32px; height: 32px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in oklab, var(--color-primary) 18%, var(--color-border)); border-radius: 50%; background: color-mix(in oklab, var(--color-primary) 9%, var(--color-surface)); color: var(--color-primary); font-family: "Newsreader", serif; }
+.speaker-avatar { display: grid; width: 32px; height: 32px; flex: 0 0 auto; place-items: center; border: 1px solid color-mix(in oklab, var(--color-primary) 18%, var(--color-border)); border-radius: 50%; background: color-mix(in oklab, var(--color-primary) 9%, var(--color-surface)); color: var(--color-primary); font-family: "Inter", sans-serif; }
 .speaker-avatar-shop { border-color: color-mix(in oklab, var(--color-accent) 38%, var(--color-border)); background: color-mix(in oklab, var(--color-accent) 17%, var(--color-surface)); color: var(--color-accent-foreground); }
 .chat-turn-right .min-w-0 { text-align: right; }
 .chat-bubble { border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 13px; text-align: left; }
@@ -200,7 +208,7 @@
 .listening-bars i:nth-child(2),.listening-bars i:nth-child(6) { height: 18px; }.listening-bars i:nth-child(3),.listening-bars i:nth-child(5) { height: 26px; }.listening-bars i:nth-child(4) { height: 14px; }
 .conversation-composer { background: color-mix(in oklab, var(--color-background) 62%, var(--color-surface)); }
 .notice-toast { position: fixed; z-index: 50; right: 20px; bottom: 20px; max-width: min(400px, calc(100vw - 40px)); border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); padding: 12px 16px; color: var(--color-foreground); box-shadow: 0 8px 28px oklch(0.2 0.03 220 / 16%); font-size: 13px; }
-.signing-stage { position: relative; display: grid; min-height: 468px; overflow: hidden; place-items: center; background-color: var(--color-camera); background-image: radial-gradient(color-mix(in oklab, var(--color-primary) 16%, transparent) .7px, transparent .7px); background-size: 16px 16px; }
+.signing-stage { position: relative; display: grid; min-height: 600px; margin: 20px; overflow: hidden; place-items: center; border-radius: 16px; background-color: var(--color-camera); background-image: radial-gradient(color-mix(in oklab, var(--color-primary) 16%, transparent) .7px, transparent .7px); background-size: 16px 16px; }
 .stage-guides { position: absolute; inset: 20px; display: flex; justify-content: space-between; pointer-events: none; }
 .stage-guides span { width: 1px; height: 100%; background: color-mix(in oklab, var(--color-primary) 10%, transparent); }
 .avatar-figure { position: relative; width: 248px; height: 350px; margin-top: -6px; }
@@ -217,7 +225,7 @@
 .avatar-hand { position: absolute; z-index: 4; top: 240px; width: 38px; height: 48px; border: 1px solid color-mix(in oklab, var(--color-primary) 30%, var(--color-border)); border-radius: 14px 14px 18px 18px; background: oklch(0.76 0.075 64); }
 .avatar-hand-left { left: 22px; transform: rotate(20deg); }.avatar-hand-right { right: 22px; transform: rotate(-20deg); }
 .avatar-hand span { position: absolute; top: -15px; width: 7px; height: 24px; border: 1px solid color-mix(in oklab, var(--color-primary) 24%, var(--color-border)); border-radius: 8px; background: oklch(0.76 0.075 64); }.avatar-hand span:nth-child(1) { left: 3px; }.avatar-hand span:nth-child(2) { left: 11px; top: -19px; }.avatar-hand span:nth-child(3) { left: 19px; top: -17px; }.avatar-hand span:nth-child(4) { left: 27px; top: -11px; }
-.stage-caption { position: absolute; right: 18px; bottom: 18px; left: 18px; border: 1px solid var(--color-border); border-radius: 6px; background: color-mix(in oklab, var(--color-surface) 96%, transparent); padding: 12px 14px; text-align: center; }
+.stage-caption { position: absolute; right: 24px; bottom: 92px; left: 24px; border: 1px solid var(--color-border); border-radius: 12px; background: color-mix(in oklab, var(--color-surface) 75%, transparent); padding: 12px 14px; text-align: center; backdrop-filter: blur(12px); }
 .stage-disclaimer { position: absolute; top: 15px; right: 17px; color: var(--color-muted-foreground); font-size: 9px; font-weight: 700; }
 .playback-area { background: var(--color-surface); }
 .playback-cluster { position: relative; display: flex; min-height: 52px; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-background); padding: 5px; }
@@ -230,12 +238,14 @@
 .design-rationale strong { font-weight: 650; }
 
 @media (max-width: 767px) {
+  .app-window { min-height: calc(100vh - 1.5rem); border-radius: 14px; }
+  .app-titlebar { min-height: 58px; padding: 10px 14px; }.traffic-lights { display: none; }.titlebar-settings { gap: 10px; }.titlebar-settings span:not([role]) { display: none; }
   .workspace-intro { padding-top: 24px; padding-bottom: 22px; }
   .workspace-intro h1 { font-size: 34px; }
   .mode-switch { width: 100%; }
   .mode-switch button { flex: 1; padding-inline: 8px; font-size: 12px; }
-  .camera-stage { min-height: 280px; }
-  .signing-stage { min-height: 420px; }
+  .camera-stage { min-height: 390px; }
+  .signing-stage { min-height: 560px; margin: 14px; }
   .avatar-figure { transform: scale(.88); }
   .playback-status { min-width: 100%; order: 2; }
   .design-rationale { padding-bottom: 20px; }
