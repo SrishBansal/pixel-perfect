@@ -259,7 +259,12 @@
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
-.workspace-grid { align-items: stretch; }
+.workspace-grid { align-items: stretch; min-width: 0; }
+.workspace-grid > section { min-width: 0; }
+.camera-stage-content { padding-inline: 12px; }
+.signing-stage .avatar-figure { align-self: start; margin-top: 28px; transform: scale(.8); transform-origin: top center; }
+.translation-control-bar .playback-status { display: none; }
+.translation-control-bar [data-slot="select-trigger"] { min-width: 145px; }
 .workspace-grid > section > div:first-child h2 { font-size: 15px; font-weight: 600; }
 .workspace-grid > section > div:first-child { min-height: 76px; }
 .mode-switch [aria-selected="true"] { background: var(--color-secondary); color: var(--color-foreground); }
