@@ -17,7 +17,6 @@ import {
   Share2,
   ShieldCheck,
   Signal,
-  Sparkle,
   Volume2,
   Webcam,
 } from "lucide-react";
@@ -108,8 +107,8 @@ function ClarifySign() {
   }
 
   return (
-    <div className="min-h-screen bg-background px-3 py-3 text-foreground sm:px-6 sm:py-6">
-      <div className="app-window mx-auto max-w-[1500px] overflow-hidden">
+    <div className="min-h-screen bg-background px-3 py-4 text-foreground sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-center">
+      <div className="app-window mx-auto w-full max-w-6xl overflow-hidden">
       <header className="app-titlebar">
         <div className="flex min-w-0 items-center gap-4">
           <div className="traffic-lights" aria-hidden="true"><i /><i /><i /></div>
@@ -119,7 +118,7 @@ function ClarifySign() {
             </span>
             <span>
               <span className="block font-display text-[15px] font-semibold leading-tight">ClarifySign</span>
-              <span className="mt-0.5 block text-[11px] text-muted-foreground">Retail conversation</span>
+              <span className="mt-0.5 block text-[11px] text-muted-foreground">Retail communication</span>
             </span>
           </a>
         </div>
@@ -146,16 +145,16 @@ function ClarifySign() {
           </div>
       </header>
 
-      <main id="home" className="px-5 pb-8 sm:px-8 lg:px-10">
+      <main id="home" className="px-5 pb-8 sm:px-8">
         <section className="workspace-intro flex flex-col justify-between gap-7 py-8 md:flex-row md:items-end lg:py-10">
           <div>
             <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase text-primary">
-              <span className="size-1.5 rounded-full bg-primary" /> COMMUNICATION WORKSPACE
+              COMMUNICATION WORKSPACE
             </p>
-            <h1 className="max-w-2xl font-display text-4xl font-semibold leading-tight sm:text-[44px]">
+            <h1 className="max-w-2xl font-display text-4xl font-semibold leading-tight">
               Conversation, made clear.
             </h1>
-            <p className="mt-3 max-w-xl text-[15px] leading-7 text-muted-foreground">
+            <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
               A shared place for a customer and shopkeeper to take their time, and communicate
               clearly.
             </p>
@@ -168,7 +167,7 @@ function ClarifySign() {
                 aria-selected={mode === "sign-to-voice"}
                 onClick={() => selectMode("sign-to-voice")}
                 variant={mode === "sign-to-voice" ? "default" : "ghost"}
-                className="h-10 gap-2 px-4"
+                className="h-9 gap-2 px-3 text-xs"
               >
                 <Hand size={16} /> Sign <ArrowRight size={14} /> Voice
               </Button>
@@ -178,7 +177,7 @@ function ClarifySign() {
                 aria-selected={mode === "voice-to-sign"}
                 onClick={() => selectMode("voice-to-sign")}
                 variant={mode === "voice-to-sign" ? "default" : "ghost"}
-                className="h-10 gap-2 px-4"
+                className="h-9 gap-2 px-3 text-xs"
               >
                 <Volume2 size={16} /> Voice <ArrowRight size={14} /> Sign
               </Button>
@@ -274,8 +273,8 @@ function SignToVoice({
   onSendReply: () => void;
 }) {
   return (
-    <div className="mt-6 grid gap-5 xl:grid-cols-[1.02fr_0.98fr]">
-      <section className="workspace-panel overflow-hidden" aria-labelledby="camera-title">
+    <div className="workspace-grid mt-2 grid gap-8 lg:grid-cols-2">
+      <section className="workspace-panel flex flex-col overflow-hidden" aria-labelledby="camera-title">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
           <div className="flex items-center gap-3">
             <div className="section-icon">
@@ -289,11 +288,11 @@ function SignToVoice({
             </div>
           </div>
           <span className="experimental-badge">
-            <Sparkle size={13} /> EXPERIMENTAL
+            EXPERIMENTAL
           </span>
         </div>
 
-        <div className="p-4 sm:p-6">
+        <div className="flex-1 p-5">
           <div className="camera-stage" aria-label="Camera placeholder. No live feed is connected.">
             <div className="camera-corner camera-corner-tl" />
             <div className="camera-corner camera-corner-tr" />
@@ -303,8 +302,8 @@ function SignToVoice({
               <div className="camera-icon-ring">
                 <Webcam size={27} strokeWidth={1.6} />
               </div>
-              <p className="mt-4 font-display text-[25px]">Camera preview</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mt-4 font-display text-lg font-medium">Camera preview</p>
+              <p className="mt-1 text-xs text-muted-foreground">
                 A live camera is not connected in this demo.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted-foreground">
@@ -353,7 +352,7 @@ function SignToVoice({
       </section>
 
       <section
-        className="workspace-panel flex min-h-[620px] flex-col"
+        className="workspace-panel flex min-h-[558px] flex-col"
         aria-labelledby="conversation-title"
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
@@ -380,7 +379,7 @@ function SignToVoice({
           </Button>
         </div>
 
-        <div className="flex-1 space-y-4 px-5 py-5">
+        <div className="flex-1 space-y-6 px-6 py-6">
           {demoState === "empty" ? (
             <div className="empty-state">
               <div className="section-icon mx-auto">
@@ -401,7 +400,7 @@ function SignToVoice({
               </div>
               <div>
                 <p className="font-display text-[22px]">Interpreting a sign…</p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-xs text-muted-foreground">
                   Illustrative listening state · no recognition is running.
                 </p>
               </div>
@@ -600,7 +599,7 @@ function VoiceToSign({
   }
 
   return (
-    <div className="mt-6 grid gap-5 xl:grid-cols-[0.86fr_1.14fr]">
+    <div className="workspace-grid mt-2 grid gap-8 lg:grid-cols-[0.86fr_1.14fr]">
       <section className="workspace-panel h-fit" aria-labelledby="voice-input-title">
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
           <div className="section-icon section-icon-saffron">
@@ -676,7 +675,7 @@ function VoiceToSign({
           </span>
         </div>
 
-        <div className="signing-stage ring-1 ring-white/10">
+        <div className="signing-stage">
           <div className="stage-guides" aria-hidden="true">
             <span />
             <span />
@@ -728,7 +727,7 @@ function VoiceToSign({
                 {languages.map((item) => <SelectItem key={item.code} value={item.code}>{item.native} · {item.label}</SelectItem>)}
               </SelectContent>
             </Select>
-            <Button type="button" onClick={onShowSign} className="h-10 gap-2 px-4">
+            <Button type="button" onClick={onShowSign} className="h-9 gap-2 px-3 text-xs">
               <Hand size={16} /> Show sign
             </Button>
             <span className="control-divider hidden sm:block" />
