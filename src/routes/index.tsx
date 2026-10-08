@@ -17,6 +17,7 @@ import {
   Share2,
   ShieldCheck,
   Signal,
+  Sparkle,
   Volume2,
   Webcam,
 } from "lucide-react";
@@ -107,24 +108,38 @@ function ClarifySign() {
   }
 
   return (
-    <div className="min-h-screen bg-background px-3 py-4 text-foreground sm:px-8 sm:py-10 lg:flex lg:items-center lg:justify-center">
-      <div className="app-window mx-auto w-full max-w-6xl overflow-hidden">
-      <header className="app-titlebar">
-        <div className="flex min-w-0 items-center gap-4">
-          <div className="traffic-lights" aria-hidden="true"><i /><i /><i /></div>
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="border-b border-border bg-surface">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-8">
           <a className="flex items-center gap-3" href="#home" aria-label="ClarifySign home">
             <span className="brand-mark" aria-hidden="true">
               <Hand size={21} strokeWidth={1.9} />
             </span>
             <span>
-              <span className="block font-display text-[15px] font-semibold leading-tight">ClarifySign</span>
-              <span className="mt-0.5 block text-[11px] text-muted-foreground">Retail communication</span>
+              <span className="block font-display text-[21px] leading-tight">ClarifySign</span>
+              <span className="mt-0.5 block text-[11px] font-medium text-muted-foreground">
+                CONVERSATION, MADE CLEAR
+              </span>
             </span>
           </a>
-        </div>
 
-          <div className="titlebar-settings">
-            <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+            <div className="flex items-center gap-2">
+              <Languages className="size-4 text-muted-foreground" aria-hidden="true" />
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="h-10 w-[148px] border-border bg-background text-sm font-medium shadow-none">
+                  <SelectValue aria-label="Language" />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((item) => (
+                    <SelectItem key={item.code} value={item.code}>
+                      {item.native} <span className="text-muted-foreground">· {item.label}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="flex items-center gap-2.5 border-l border-border pl-4">
               <Volume2 className="size-4 text-muted-foreground" aria-hidden="true" />
               <span className="text-[13px] font-medium">Speak aloud</span>
               <Switch
@@ -143,18 +158,19 @@ function ClarifySign() {
               />
             </div>
           </div>
+        </div>
       </header>
 
-      <main id="home" className="px-5 pb-8 sm:px-8">
-        <section className="workspace-intro flex flex-col justify-between gap-7 py-8 md:flex-row md:items-end lg:py-10">
+      <main id="home" className="mx-auto max-w-[1440px] px-5 pb-10 sm:px-8">
+        <section className="workspace-intro flex flex-col justify-between gap-6 border-b border-border py-7 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase text-primary">
-              COMMUNICATION WORKSPACE
+            <p className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase text-primary">
+              <span className="size-1.5 rounded-full bg-primary" /> RETAIL CONVERSATION SPACE
             </p>
-            <h1 className="max-w-2xl font-display text-4xl font-semibold leading-tight">
-              Conversation, made clear.
+            <h1 className="font-display text-4xl leading-tight sm:text-[42px]">
+              A little easier to understand.
             </h1>
-            <p className="mt-3 max-w-md text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
               A shared place for a customer and shopkeeper to take their time, and communicate
               clearly.
             </p>
@@ -167,7 +183,7 @@ function ClarifySign() {
                 aria-selected={mode === "sign-to-voice"}
                 onClick={() => selectMode("sign-to-voice")}
                 variant={mode === "sign-to-voice" ? "default" : "ghost"}
-                className="h-9 gap-2 px-3 text-xs"
+                className="h-10 gap-2 px-4"
               >
                 <Hand size={16} /> Sign <ArrowRight size={14} /> Voice
               </Button>
@@ -177,12 +193,14 @@ function ClarifySign() {
                 aria-selected={mode === "voice-to-sign"}
                 onClick={() => selectMode("voice-to-sign")}
                 variant={mode === "voice-to-sign" ? "default" : "ghost"}
-                className="h-9 gap-2 px-3 text-xs"
+                className="h-10 gap-2 px-4"
               >
                 <Volume2 size={16} /> Voice <ArrowRight size={14} /> Sign
               </Button>
             </div>
-            <span className="demo-badge"><span className="size-1.5 rounded-full bg-accent" /> DEMO</span>
+            <span className="demo-badge">
+              <span className="size-1.5 rounded-full bg-accent" /> DEMO WORKSPACE
+            </span>
           </div>
         </section>
 
@@ -235,8 +253,30 @@ function ClarifySign() {
           />
         )}
 
+        <section className="design-rationale mt-9 grid gap-5 border-t border-border pt-6 md:grid-cols-[170px_1fr]">
+          <div>
+            <p className="text-[11px] font-semibold uppercase text-primary">Design notes</p>
+            <h2 className="mt-1 font-display text-xl">Made for clarity.</h2>
+          </div>
+          <div className="grid gap-5 text-[13px] leading-6 text-muted-foreground sm:grid-cols-3">
+            <p>
+              <strong className="text-foreground">Type.</strong> Newsreader brings a composed, human
+              warmth to headings; Inter keeps interface copy crisp, with Noto Sans supporting Indian
+              scripts.
+            </p>
+            <p>
+              <strong className="text-foreground">Colour.</strong> Deep teal signals trust, saffron
+              marks moments needing attention, and a cool pearl canvas keeps long conversations
+              comfortable to read.
+            </p>
+            <p>
+              <strong className="text-foreground">Rhythm.</strong> An 8-point spacing rhythm,
+              restrained 6–12px corners, and clear panel boundaries make the workspace feel
+              considered and easy to scan.
+            </p>
+          </div>
+        </section>
       </main>
-      </div>
 
       {notice && (
         <div className="notice-toast" role="status">
@@ -273,8 +313,8 @@ function SignToVoice({
   onSendReply: () => void;
 }) {
   return (
-    <div className="workspace-grid mt-2 grid gap-8 lg:grid-cols-2">
-      <section className="workspace-panel flex flex-col overflow-hidden" aria-labelledby="camera-title">
+    <div className="mt-6 grid gap-5 xl:grid-cols-[1.02fr_0.98fr]">
+      <section className="workspace-panel overflow-hidden" aria-labelledby="camera-title">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
           <div className="flex items-center gap-3">
             <div className="section-icon">
@@ -288,11 +328,11 @@ function SignToVoice({
             </div>
           </div>
           <span className="experimental-badge">
-            EXPERIMENTAL
+            <Sparkle size={13} /> EXPERIMENTAL
           </span>
         </div>
 
-        <div className="flex-1 p-5">
+        <div className="p-4 sm:p-5">
           <div className="camera-stage" aria-label="Camera placeholder. No live feed is connected.">
             <div className="camera-corner camera-corner-tl" />
             <div className="camera-corner camera-corner-tr" />
@@ -302,8 +342,8 @@ function SignToVoice({
               <div className="camera-icon-ring">
                 <Webcam size={27} strokeWidth={1.6} />
               </div>
-              <p className="mt-4 font-display text-lg font-medium">Camera preview</p>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-4 font-display text-[25px]">Camera preview</p>
+              <p className="mt-1 text-sm text-muted-foreground">
                 A live camera is not connected in this demo.
               </p>
               <span className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted-foreground">
@@ -311,13 +351,20 @@ function SignToVoice({
               </span>
             </div>
             <div className="camera-watermark">CLARIFYSIGN · ISL</div>
-            <div className="floating-control-bar camera-control-bar">
-              <div className="hidden flex-wrap gap-2 lg:flex" aria-label="Illustrative status indicators">
-                <StatusBadge icon={<Hand size={13} />} label="Hands" />
-                <StatusBadge icon={<Signal size={13} />} label="Pose" />
-              </div>
-              <span className="control-divider hidden lg:block" />
-              <div className="flex flex-wrap justify-center gap-1.5" role="group" aria-label="Choose demo state">
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap gap-2" aria-label="Illustrative status indicators">
+              <StatusBadge icon={<Hand size={13} />} label="Hands · sample" />
+              <StatusBadge icon={<Signal size={13} />} label="Pose · sample" />
+              <StatusBadge label="— fps" />
+            </div>
+            <p className="text-[11px] text-muted-foreground">Illustrative status only</p>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+            <span className="text-xs font-medium text-muted-foreground">Conversation state</span>
+            <div className="flex flex-wrap gap-1.5" role="group" aria-label="Choose demo state">
               {(
                 [
                   ["conversation", "Conversation"],
@@ -337,7 +384,6 @@ function SignToVoice({
                   {label}
                 </Button>
               ))}
-              </div>
             </div>
           </div>
         </div>
@@ -352,7 +398,7 @@ function SignToVoice({
       </section>
 
       <section
-        className="workspace-panel flex min-h-[558px] flex-col"
+        className="workspace-panel flex min-h-[620px] flex-col"
         aria-labelledby="conversation-title"
       >
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
@@ -379,7 +425,7 @@ function SignToVoice({
           </Button>
         </div>
 
-        <div className="flex-1 space-y-6 px-6 py-6">
+        <div className="flex-1 space-y-4 px-5 py-5">
           {demoState === "empty" ? (
             <div className="empty-state">
               <div className="section-icon mx-auto">
@@ -400,7 +446,7 @@ function SignToVoice({
               </div>
               <div>
                 <p className="font-display text-[22px]">Interpreting a sign…</p>
-                <p className="mt-1 text-xs text-muted-foreground">
+                <p className="mt-1 text-sm text-muted-foreground">
                   Illustrative listening state · no recognition is running.
                 </p>
               </div>
@@ -599,7 +645,7 @@ function VoiceToSign({
   }
 
   return (
-    <div className="workspace-grid mt-2 grid gap-8 lg:grid-cols-[0.86fr_1.14fr]">
+    <div className="mt-6 grid gap-5 xl:grid-cols-[0.86fr_1.14fr]">
       <section className="workspace-panel h-fit" aria-labelledby="voice-input-title">
         <div className="flex items-center gap-3 border-b border-border px-5 py-4">
           <div className="section-icon section-icon-saffron">
@@ -645,6 +691,31 @@ function VoiceToSign({
               Speech input is not connected in this demo. You can type your message above.
             </p>
           )}
+          <div className="mt-5 grid gap-3 sm:grid-cols-[minmax(180px,1fr)_auto] sm:items-end">
+            <div>
+              <label className="mb-2 block text-sm font-semibold" htmlFor="sign-language">
+                Spoken language
+              </label>
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger
+                  id="sign-language"
+                  className="h-11 border-input bg-background shadow-none"
+                >
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {languages.map((item) => (
+                    <SelectItem key={item.code} value={item.code}>
+                      {item.native} · {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <Button type="button" onClick={onShowSign} className="h-11 gap-2 px-5">
+              <Hand size={16} /> Show sign
+            </Button>
+          </div>
           <div className="mt-5 flex items-start gap-2 border-t border-border pt-4">
             <CircleHelp className="mt-0.5 size-4 shrink-0 text-primary" />
             <p className="text-xs leading-5 text-muted-foreground">
@@ -718,19 +789,10 @@ function VoiceToSign({
             </p>
           </div>
           <div className="stage-disclaimer">STATIC FIGURE · NOT AN ANIMATED SIGN</div>
-          <div className="floating-control-bar translation-control-bar" role="group" aria-label="Translation and preview controls">
-            <Select value={language} onValueChange={setLanguage}>
-              <SelectTrigger id="sign-language" className="h-10 w-[132px] border-border bg-muted/60 shadow-none">
-                <Languages className="size-4" /><SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {languages.map((item) => <SelectItem key={item.code} value={item.code}>{item.native} · {item.label}</SelectItem>)}
-              </SelectContent>
-            </Select>
-            <Button type="button" onClick={onShowSign} className="h-9 gap-2 px-3 text-xs">
-              <Hand size={16} /> Show sign
-            </Button>
-            <span className="control-divider hidden sm:block" />
+        </div>
+
+        <div className="playback-area px-5 py-4">
+          <div className="playback-cluster" role="group" aria-label="Preview controls">
             <Button
               type="button"
               variant="ghost"
@@ -753,7 +815,7 @@ function VoiceToSign({
             >
               <Play />
             </Button>
-            <span className="playback-status hidden xl:block">
+            <span className="playback-status">
               {shownText ? "Text prepared · no animation" : "Static preview · no motion"}
             </span>
             <span className="playback-divider" />
@@ -824,6 +886,9 @@ function VoiceToSign({
               <Share2 />
             </Button>
           </div>
+          <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted-foreground">
+            <CircleHelp size={13} /> These controls do not animate or generate signing.
+          </p>
         </div>
       </section>
     </div>
